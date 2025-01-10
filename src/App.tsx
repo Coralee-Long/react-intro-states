@@ -2,14 +2,15 @@ import { useState } from "react";
 import './App.css';
 import { CharacterList } from "./components/CharacterList.tsx";
 import { Search } from "./components/Search.tsx";
+import { Filter } from "./components/Filter.tsx";
 import { data as response } from "./data/data.ts";
-import {Filter} from "./components/Filter.tsx";
 
 function App() {
     const [data, setData] = useState(response);
     const [search, setSearch] = useState("");
     const [genderFilter, setGenderFilter] = useState("");
     const [statusFilter, setStatusFilter] = useState("");
+    const [visibleCount, setVisibleCount] = useState(5);  // NEW STATE
 
     // Filter by name, gender, and status
     const filteredData = data.filter((character) => {
@@ -18,6 +19,14 @@ function App() {
         const matchesStatus = statusFilter ? character.status === statusFilter : true;
         return matchesName && matchesGender && matchesStatus;
     });
+
+    // Show only a subset of the filtered data
+    const visibleData = filteredData.slice(0, visibleCount);
+
+    // Load 5 more characters on button click
+    const loadMore = () => {
+        setVisibleCount((prevCount) => prevCount + 5);
+    };
 
     return (
         <div className="min-h-screen w-full bg-gray-900 flex flex-col items-center p-8">
@@ -33,14 +42,15 @@ function App() {
                 genderFilter={genderFilter}
                 setGenderFilter={setGenderFilter}
                 statusFilter={statusFilter}
-                setStatusFilter={setStatusFilter} />
+                setStatusFilter={setStatusFilter}
+            />
 
             {/* Character List or Error */}
             <div className="mt-8 w-full flex justify-center">
                 {filteredData.length === 0 ? (
                     <p className="text-center text-red-500">No characters found.</p>
                 ) : (
-                    <CharacterList data={filteredData} />
+                    <CharacterList data={visibleData} loadMore={loadMore} hasMore={visibleCount < filteredData.length} />
                 )}
             </div>
         </div>

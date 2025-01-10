@@ -1,6 +1,7 @@
 import { Card } from "./Card.tsx";
 
 export const Character = ({ character }) => {
+
     const { name, status, species, type, gender, origin, location, image } = character;
 
     return (
