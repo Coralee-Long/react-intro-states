@@ -29,7 +29,7 @@ function App() {
     };
 
     return (
-        <div className="min-h-screen w-full bg-gray-900 flex flex-col items-center p-8">
+        <div className="min-h-screen w-full bg-gray-900 flex flex-col items-center p-8 ">
             <h1 className="text-3xl font-bold text-center text-white mb-6">
                 Rick & Morty Characters
             </h1>

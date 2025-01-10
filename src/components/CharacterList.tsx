@@ -2,8 +2,8 @@ import { Character } from "./Character.tsx"
 
 export const CharacterList = ({ data, loadMore, hasMore }) => {
     return (
-        <div className="flex flex-col items-center">
-            <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-col justify-center items-center w-100 mx-auto">
+            <div className="flex flex-wrap gap-2 px-8">
                 {data.map((character) => (
                     <Character key={character.id} character={character} />
                 ))}
