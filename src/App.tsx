@@ -1,59 +1,22 @@
-import { useState } from "react";
+import  { Routes, Route } from "react-router-dom";
+import { HomePage } from "./pages/HomePage.tsx";
+import { RickAndMortyPage } from "./pages/RickAndMortyPage.tsx";
 import './App.css';
-import { CharacterList } from "./components/CharacterList.tsx";
-import { Search } from "./components/Search.tsx";
-import { Filter } from "./components/Filter.tsx";
-import { data as response } from "./data/data.ts";
+import { Header } from "./components/Header.tsx";
+import { CharacterPage} from "./pages/CharacterPage.tsx";
+
 
 function App() {
-    const [data, setData] = useState(response);
-    const [search, setSearch] = useState("");
-    const [genderFilter, setGenderFilter] = useState("");
-    const [statusFilter, setStatusFilter] = useState("");
-    const [visibleCount, setVisibleCount] = useState(5);  // NEW STATE
-
-    // Filter by name, gender, and status
-    const filteredData = data.filter((character) => {
-        const matchesName = character.name.toLowerCase().includes(search.toLowerCase());
-        const matchesGender = genderFilter ? character.gender === genderFilter : true;
-        const matchesStatus = statusFilter ? character.status === statusFilter : true;
-        return matchesName && matchesGender && matchesStatus;
-    });
-
-    // Show only a subset of the filtered data
-    const visibleData = filteredData.slice(0, visibleCount);
-
-    // Load 5 more characters on button click
-    const loadMore = () => {
-        setVisibleCount((prevCount) => prevCount + 5);
-    };
 
     return (
-        <div className="min-h-screen w-full bg-gray-900 flex flex-col items-center p-8 ">
-            <h1 className="text-3xl font-bold text-center text-white mb-6">
-                Rick & Morty Characters
-            </h1>
-
-            {/* Search Input */}
-            <Search search={search} setSearch={setSearch} />
-
-            {/* Filter Options */}
-            <Filter
-                genderFilter={genderFilter}
-                setGenderFilter={setGenderFilter}
-                statusFilter={statusFilter}
-                setStatusFilter={setStatusFilter}
-            />
-
-            {/* Character List or Error */}
-            <div className="mt-8 w-full flex justify-center">
-                {filteredData.length === 0 ? (
-                    <p className="text-center text-red-500">No characters found.</p>
-                ) : (
-                    <CharacterList data={visibleData} loadMore={loadMore} hasMore={visibleCount < filteredData.length} />
-                )}
-            </div>
-        </div>
+        <>
+            <Header />
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/characters" element={<RickAndMortyPage />} />
+                    <Route path="/characters/:id" element={<CharacterPage />} />
+                </Routes>
+        </>
     );
 }
 
