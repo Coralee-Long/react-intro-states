@@ -1,10 +1,10 @@
 import { useParams, Link } from "react-router-dom";
-import { data } from "../data/data";
 import { CharacterDetail } from "../components/CharacterDetail";
+import { CommentSection } from "../components/CommentSection";
 
-export const CharacterDetailPage = () => {
+export const CharacterDetailPage = ({ characters, addComment, styledButton }) => {
     const { id } = useParams();  // Get the character ID from the URL
-    const character = data.find((char) => char.id === parseInt(id));  // Find the character by ID
+    const character = characters.find((character) => character.id === parseInt(id));  // Find the character by ID
 
     if (!character) {
         return (
@@ -14,7 +14,7 @@ export const CharacterDetailPage = () => {
         );
     }
 
-    const { name, status, species, type, gender, origin, location, image } = character;
+    const { name, status, species, type, gender, origin, location, image, comments } = character;
 
     const details = [
         { label: "Status", value: status },
@@ -39,9 +39,12 @@ export const CharacterDetailPage = () => {
                 ))}
             </div>
 
+            {/* Comment Section */}
+            <CommentSection characterId={character.id} comments={comments} addComment={addComment} styledButton={styledButton} />
+
             <Link
                 to="/characters"
-                className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+                className={styledButton}
             >
                 ← Back to Characters
             </Link>

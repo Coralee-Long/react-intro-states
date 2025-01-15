@@ -1,11 +1,11 @@
 import { CharacterCard } from "./CharacterCard.tsx";
 
-export const CharacterList = ({ data, loadMore, hasMore }) => {
+export const CharacterList = ({ characters, loadMore, hasMore, styledButton}) => {
     return (
         <div className="flex flex-col items-center">
             {/* Grid Layout for Character Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-screen-lg">
-                {data.map((character) => (
+                {characters.map((character) => (
                     <CharacterCard key={character.id} character={character} />
                 ))}
             </div>
@@ -14,7 +14,7 @@ export const CharacterList = ({ data, loadMore, hasMore }) => {
             {hasMore && (
                 <button
                     onClick={loadMore}
-                    className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+                    className={styledButton}
                 >
                     Load More
                 </button>
