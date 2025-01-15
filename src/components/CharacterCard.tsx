@@ -5,7 +5,7 @@ export const CharacterCard = ({ character }) => {
     const { id, name, image } = character;
 
     return (
-        <Link to={`/characters/${id}`} className="w-full">
+        <Link to={`/characters/${id}`} className="w-full gap-6">
             <Card className="w-64 transform transition shadow-md cursor-pointer hover:scale-105">
                 <img
                     src={image}
