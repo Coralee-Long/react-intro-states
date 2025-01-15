@@ -1,9 +1,9 @@
 import  { Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage.tsx";
-import { RickAndMortyPage } from "./pages/RickAndMortyPage.tsx";
+import { CharactersPage } from "./pages/CharactersPage.tsx";
 import './App.css';
 import { Header } from "./components/Header.tsx";
-import { CharacterPage} from "./pages/CharacterPage.tsx";
+import { CharacterDetailPage} from "./pages/CharacterDetailPage.tsx";
 
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
             <Header />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/characters" element={<RickAndMortyPage />} />
-                    <Route path="/characters/:id" element={<CharacterPage />} />
+                    <Route path="/characters" element={<CharactersPage />} />
+                    <Route path="/characters/:id" element={<CharacterDetailPage />} />
                 </Routes>
         </>
     );

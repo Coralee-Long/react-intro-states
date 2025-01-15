@@ -1,11 +1,12 @@
-import { Character } from "./Character.tsx"
+import { CharacterCard } from "./CharacterCard.tsx";
 
 export const CharacterList = ({ data, loadMore, hasMore }) => {
     return (
-        <div className="flex flex-col items-center w-full mx-auto">
-            <div className="flex flex-wrap gap-6 px-8 max-w-screen-lg justify-start">
+        <div className="flex flex-col items-center">
+            {/* Grid Layout for Character Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-screen-lg">
                 {data.map((character) => (
-                    <Character key={character.id} character={character} />
+                    <CharacterCard key={character.id} character={character} />
                 ))}
             </div>
 
